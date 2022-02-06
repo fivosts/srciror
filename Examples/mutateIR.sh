@@ -20,12 +20,12 @@ echo "the collected coverage is under /tmp/llvm_coverage"
 # generate mutation opportunities
 echo "SRCIROR: generating mutation opportunities"
 python $CURR_DIR/../PythonWrappers/irMutationClang test.c
-echo "The generated mutants are under ~/.srciror/bc-mutants/681837891"
+echo "The generated mutants are under ~/.srciror/bc-mutants/ffff"
 
 # TODO: intersect with coverage
 # generate one mutant executable
 file_name=`cat ~/.srciror/ir-coverage/hash-map | grep "test.c" | cut -f1 -d:`
-mutation=`head -n1 ~/.srciror/bc-mutants/681837891 | cut -f1 -d,`
+mutation=`head -n1 ~/.srciror/bc-mutants/ffff | cut -f1 -d,`
 echo "file name is: $file_name and mutation requested is: $mutation" 
 echo "$file_name:$mutation" > ~/.srciror/mutation_request.txt
 python $CURR_DIR/../PythonWrappers/irVanillaClang test.c
