@@ -9,7 +9,7 @@ from irUtil import run
 
 
 def instrumentForCoverage(bitcode_file, src_file, opt_command, log_file):
-    hash_code = zlib.adler32(bitcode_file + "+" + src_file) & 0xffffffff    # Anding with 0xffffffff for Python compatibility issues
+    hash_code = zlib.adler32((bitcode_file + "+" + src_file).encode()) & 0xffffffff    # Anding with 0xffffffff for Python compatibility issues
     command = opt_command + " -coverage " + bitcode_file + " -file_code=" + str(hash_code) + " -o " + bitcode_file
     with open(log_file, 'a') as log_file:
         log_file.write(bitcode_file + "+" + src_file + ":" + str(hash_code) + "\n")
