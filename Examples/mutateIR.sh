@@ -11,7 +11,7 @@ export SRCIROR_LLVM_BIN=$CURR_DIR/../llvm-build/Release+Asserts/bin/
 rm -f /tmp/llvm_mutate_trace # remove any existing coverage
 rm -rf ~/.srciror # remove logs and results from previous runs
 echo "SRCIROR: Instrumenting for Coverage"
-python $CURR_DIR/../PythonWrappers/irCoverageClang test.c -o test
+python $CURR_DIR/../PythonWrappers/irCoverageClang $@ test.c -o test
 # run the executable to collect coverage
 ./test
 echo "the collected coverage is under /tmp/llvm_coverage"
