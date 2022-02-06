@@ -11,7 +11,7 @@ from irUtil import getSummaryDir, run
 
 
 def collectMutations(bitcode_file, src_file, opt_command, dummy):   # Using a dummy variable holder for last parameter for consistency
-    hash_code = zlib.adler32(bitcode_file + "+" + src_file) & 0xffffffff
+    hash_code = zlib.adler32((bitcode_file + "+" + src_file).encode()) & 0xffffffff
     command = opt_command + " -getBinaryOperators " + bitcode_file
     print("the current directory is: " + os.getcwd())
     print("collecting binops mutants with the command: " + command)
