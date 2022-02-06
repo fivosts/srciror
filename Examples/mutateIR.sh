@@ -25,7 +25,14 @@ echo "The generated mutants are under ~/.srciror/bc-mutants/ffff"
 # TODO: intersect with coverage
 # generate one mutant executable
 file_name=`cat ~/.srciror/ir-coverage/hash-map | grep "test.c" | cut -f1 -d:`
-mutation=`head -n1 ~/.srciror/bc-mutants/ffff | cut -f1 -d,`
-echo "file name is: $file_name and mutation requested is: $mutation" 
-echo "$file_name:$mutation" > ~/.srciror/mutation_request.txt
-python $CURR_DIR/../PythonWrappers/irVanillaClang test.c
+mutations=`cat ~/.srciror/bc-mutants/ffff | cut -f1 -d,`
+mutations_array=($mutations)
+let "c=0"
+for i in "${mutations[@]}"
+do
+	echo "file name is: $file_name and mutation requested is: $mutation" 
+	echo "$file_name:$mutation" > ~/.srciror/mutation_request.txt
+	python $CURR_DIR/../PythonWrappers/irVanillaClang test.c
+	mv test.ll test-$c.ll
+	let "c++"
+done
